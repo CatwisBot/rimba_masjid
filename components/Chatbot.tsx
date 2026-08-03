@@ -10,6 +10,7 @@ import {
   RefreshCw,
   ExternalLink,
 } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { askRimbaAI, ChatMessage } from "@/app/actions/chat";
 
 // Helper untuk memformat teks markdown (bold, link) ke elemen Tailwind
@@ -78,11 +79,12 @@ const DEFAULT_INITIAL_MESSAGE: ChatMessage[] = [
   {
     role: "assistant",
     content:
-      "Assalamu'alaikum Kak! 👋 Kenalin, aku **Tanya RIMBA**, teman virtual asik yang siap bantu kamu cari tahu informasi seputar agenda kegiatan, kajian, info lomba, sampai gimana caranya gabung jadi bagian dari keluarga RIMBA Masjid Al-Barkah Bekasi. 🕌✨\n\nMau kepoin info apa kita hari ini? Yuk, langsung ketik aja pertanyaanmu! 😊🚀",
+      "Assalamu'alaikum Kak! 👋 Kenalin, aku **Tanya RIMBA**, teman virtual asik yang siap bantu kamu cari tahu informasi seputar agenda kegiatan, kajian, info lomba, sampai gimana caranya gabung jadi bagian dari keluarga RIMBA Masjid Al-Barkah. 🕌✨\n\nMau kepoin info apa kita hari ini? Yuk, langsung ketik aja pertanyaanmu! 😊🚀",
   },
 ];
 
 export default function Chatbot() {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>(DEFAULT_INITIAL_MESSAGE);
   const [input, setInput] = useState("");
@@ -181,6 +183,8 @@ export default function Chatbot() {
       localStorage.removeItem(CHAT_STORAGE_KEY);
     } catch {}
   };
+
+  if (pathname?.startsWith("/admin") || pathname === "/login") return null;
 
   return (
     <div className="fixed bottom-6 right-6 z-50">
