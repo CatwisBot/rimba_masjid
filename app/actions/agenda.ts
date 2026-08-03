@@ -57,6 +57,7 @@ export async function createAgenda(formData: {
         image: formData.image || null,
         deadline: formData.deadline || null,
         requirements: formData.requirements || null,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } as any,
     });
 
@@ -111,6 +112,7 @@ export async function updateAgenda(
         image: formData.image || null,
         deadline: formData.deadline || null,
         requirements: formData.requirements || null,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } as any,
     });
 
