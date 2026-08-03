@@ -27,7 +27,7 @@ export const EVENTS_DATA: AgendaEvent[] = [
     badgeColor: "bg-emerald-100 text-emerald-700 border-emerald-200",
     title: "Lomba Tahfidz Al-Qur'an Remaja 2026",
     snippet:
-      "Kompetisi hafalan Al-Qur'an (Juz 30 & Juz 29) tingkat remaja se-Kota Bekasi dengan total hadiah jutaan rupiah.",
+      "Kompetisi hafalan Al-Qur'an (Juz 30 & Juz 29) tingkat remaja dengan total hadiah jutaan rupiah.",
   },
   {
     id: "3",
