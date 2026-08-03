@@ -106,14 +106,14 @@ async function main() {
   console.log("Sukses membuat Master Kategori Terpusat");
 
   // 3. Seed 3 User Accounts
-  const passwordBPH = await bcrypt.hash("bph12345", 10);
-  const passwordHumas = await bcrypt.hash("humas12345", 10);
-  const passwordBendahara = await bcrypt.hash("bendahara12345", 10);
+  const passwordBPH = await bcrypt.hash("adminbph", 10);
+  const passwordHumas = await bcrypt.hash("adminhumas", 10);
+  const passwordBendahara = await bcrypt.hash("adminbendahara", 10);
 
   const userBPH = await prisma.user.create({
     data: {
       name: "Admin BPH",
-      email: "bph@rimba.or.id",
+      email: "adminbph@gmail.com",
       password: passwordBPH,
       role: Role.BPH,
       badge: "Super Admin",
@@ -122,8 +122,8 @@ async function main() {
 
   const userHumas = await prisma.user.create({
     data: {
-      name: "Humas RIMBA",
-      email: "humas@rimba.or.id",
+      name: "Admin Humas",
+      email: "adminhumas@gmail.com",
       password: passwordHumas,
       role: Role.HUMAS,
       badge: "Humas Admin",
@@ -132,8 +132,8 @@ async function main() {
 
   const userBendahara = await prisma.user.create({
     data: {
-      name: "Bendahara RIMBA",
-      email: "bendahara@rimba.or.id",
+      name: "Admin Benda",
+      email: "adminbendahara@gmail.com",
       password: passwordBendahara,
       role: Role.BENDAHARA,
       badge: "Bendahara Admin",

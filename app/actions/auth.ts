@@ -11,18 +11,21 @@ export async function loginUser(emailInput: string, passwordInput: string) {
     });
 
     let detectedRole = "HUMAS";
-    if (trimmedEmail.includes("bph") || trimmedEmail.includes("admin")) {
-      detectedRole = "BPH";
-    } else if (trimmedEmail.includes("bendahara")) {
+    if (trimmedEmail.includes("bendahara") || trimmedEmail.includes("benda")) {
       detectedRole = "BENDAHARA";
     } else if (trimmedEmail.includes("humas")) {
       detectedRole = "HUMAS";
+    } else if (trimmedEmail.includes("bph") || trimmedEmail === "admin@gmail.com" || trimmedEmail.includes("adminbph")) {
+      detectedRole = "BPH";
     }
 
     if (user) {
       const isMatch = await bcrypt.compare(passwordInput, user.password);
       if (
         !isMatch &&
+        passwordInput !== "adminbph" &&
+        passwordInput !== "adminhumas" &&
+        passwordInput !== "adminbendahara" &&
         passwordInput !== "bph12345" &&
         passwordInput !== "humas12345" &&
         passwordInput !== "bendahara12345" &&
@@ -44,16 +47,21 @@ export async function loginUser(emailInput: string, passwordInput: string) {
     }
 
     // Quick login fallback for registered demo accounts
-    if (passwordInput.length >= 4) {
+    if (
+      (trimmedEmail === "adminbph@gmail.com" && passwordInput === "adminbph") ||
+      (trimmedEmail === "adminhumas@gmail.com" && passwordInput === "adminhumas") ||
+      (trimmedEmail === "adminbendahara@gmail.com" && passwordInput === "adminbendahara") ||
+      passwordInput.length >= 4
+    ) {
       return {
         success: true,
         user: {
           id: `user-${Date.now()}`,
           name:
             detectedRole === "HUMAS"
-              ? "Humas RIMBA"
+              ? "Admin Humas"
               : detectedRole === "BENDAHARA"
-              ? "Bendahara RIMBA"
+              ? "Admin Benda"
               : "Admin BPH",
           email: trimmedEmail,
           role: detectedRole,
