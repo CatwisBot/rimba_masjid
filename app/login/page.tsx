@@ -133,7 +133,6 @@ export default function LoginPage() {
                     <input
                       type="email"
                       required
-                      placeholder="humas@rimba.or.id"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       className="w-full pl-10 pr-4 py-3 text-xs sm:text-sm rounded-2xl bg-background border border-border/80 focus:outline-none focus:border-primary text-text transition-colors"
@@ -165,7 +164,6 @@ export default function LoginPage() {
                     <input
                       type={showPassword ? "text" : "password"}
                       required
-                      placeholder="••••••••"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       className="w-full pl-10 pr-10 py-3 text-xs sm:text-sm rounded-2xl bg-background border border-border/80 focus:outline-none focus:border-primary text-text transition-colors"
