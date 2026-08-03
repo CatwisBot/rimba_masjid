@@ -1,5 +1,5 @@
 import Hero from "@/components/Hero";
-import NewsAgenda from "@/components/NewsAgenda";
+import NewsAgenda, { BeritaItem, AgendaItem } from "@/components/NewsAgenda";
 import Programs from "@/components/Programs";
 import Features from "@/components/Features";
 import CTA from "@/components/CTA";
@@ -11,15 +11,15 @@ export const revalidate = 0;
 
 export default async function HomePage() {
   const [beritaRes, agendaRes, anggotaCount, agendaCount, galeriCount] = await Promise.all([
-    getBerita().catch(() => ({ success: false, data: [] })),
-    getAgenda().catch(() => ({ success: false, data: [] })),
+    getBerita().catch(() => ({ success: false, data: [] as BeritaItem[] })),
+    getAgenda().catch(() => ({ success: false, data: [] as AgendaItem[] })),
     prisma.anggota.count().catch(() => 0),
     prisma.agenda.count().catch(() => 0),
     prisma.galeri.count().catch(() => 0),
   ]);
 
-  const beritaList = beritaRes.success && beritaRes.data ? beritaRes.data : [];
-  const agendaList = agendaRes.success && agendaRes.data ? agendaRes.data : [];
+  const beritaList: BeritaItem[] = beritaRes.success && Array.isArray(beritaRes.data) ? (beritaRes.data as BeritaItem[]) : [];
+  const agendaList: AgendaItem[] = agendaRes.success && Array.isArray(agendaRes.data) ? (agendaRes.data as AgendaItem[]) : [];
 
   return (
     <main className="min-h-screen">
