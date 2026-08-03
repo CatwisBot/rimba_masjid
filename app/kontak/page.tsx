@@ -124,7 +124,7 @@ export default function KontakPage() {
                   <Youtube className="w-5 h-5" />
                 </a>
                 <a
-                  href="https://wa.me/6281234567890"
+                  href="https://wa.me/6281513983136"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 rounded-xl bg-background border border-border flex items-center justify-center text-text/80 hover:text-primary hover:bg-primary/10 transition-colors"
