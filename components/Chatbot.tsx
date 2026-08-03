@@ -78,7 +78,7 @@ const DEFAULT_INITIAL_MESSAGE: ChatMessage[] = [
   {
     role: "assistant",
     content:
-      "Assalamu'alaikum warahmatullahi wabarakatuh! Saya **Tanya RIMBA**, asisten virtual yang siap memberikan informasi lengkap seputar kegiatan di RIMBA Masjid Al-Barkah Bekasi. Ada yang bisa saya bantu hari ini?",
+      "Assalamu'alaikum Kak! 👋 Kenalin, aku **Tanya RIMBA**, teman virtual asik yang siap bantu kamu cari tahu informasi seputar agenda kegiatan, kajian, info lomba, sampai gimana caranya gabung jadi bagian dari keluarga RIMBA Masjid Al-Barkah Bekasi. 🕌✨\n\nMau kepoin info apa kita hari ini? Yuk, langsung ketik aja pertanyaanmu! 😊🚀",
   },
 ];
 
@@ -151,7 +151,7 @@ export default function Chatbot() {
         ...prev,
         {
           role: "assistant",
-          content: res.reply || "Mohon maaf, saat ini layanan sedang sibuk. Silakan coba kembali beberapa saat lagi.",
+          content: res.reply || "Waduh, sepertinya antrean pertanyaan lagi padat banget nih, Kak. Coba ketik lagi beberapa saat ya! 🙏😊",
         },
       ]);
     } catch {
@@ -160,7 +160,7 @@ export default function Chatbot() {
         {
           role: "assistant",
           content:
-            "Mohon maaf, layanan sedang dalam pemeliharaan sementara. Silakan dapatkan informasi kegiatan melalui menu utama atau halaman Kontak di website ini. 🙏",
+            "Yah, mohon maaf banget Kak, sistem perpesanan AI kami lagi istirahat dan perawatan sejenak. Tapi tenang, kamu tetap bisa lihat semua info kegiatan terbaru di menu utama atau hubungi pengurus via halaman Kontak ya! 🙏✨",
         },
       ]);
     } finally {
@@ -173,7 +173,7 @@ export default function Chatbot() {
       {
         role: "assistant",
         content:
-          "Assalamu'alaikum! Percakapan telah direset. Silakan ajukan pertanyaan kembali tentang kegiatan dan kajian di RIMBA Masjid Al-Barkah!",
+          "Assalamu'alaikum Kak! ✨ Riwayat obrolan udah aku refresh biar kita bisa ngobrol dari awal lagi, nih. Ada info seru lain seputar agenda, lomba, atau kajian di RIMBA yang mau kamu tanyakan? Aku siap berdiskusi! 😉🚀",
       },
     ];
     setMessages(resetMessages);
