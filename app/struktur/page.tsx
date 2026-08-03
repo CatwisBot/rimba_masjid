@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import {
   Users,
   Megaphone,
@@ -239,13 +238,15 @@ export default function StrukturPage() {
             Pendaftaran pengurus dan relawan divisi terbuka bagi remaja masjid yang ingin mengasah pengalaman dan berkontribusi nyata.
           </p>
           <div className="pt-2">
-            <Link
-              href="/kontak"
+            <a
+              href="https://wa.me/6281513983136"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-7 py-3 text-sm font-bold text-primary bg-white hover:bg-accent hover:text-primary-dark rounded-full shadow-md transition-all gap-2"
             >
               <span>Hubungi Pengurus</span>
               <ArrowRight className="w-4 h-4" />
-            </Link>
+            </a>
           </div>
         </div>
       </div>
