@@ -93,7 +93,7 @@ async function main() {
   const katLomba = await prisma.kategori.create({
     data: { name: "Lomba", type: "AGENDA", description: "Kompetisi & lomba keislaman" },
   });
-  const _katPengumuman = await prisma.kategori.create({
+  await prisma.kategori.create({
     data: { name: "Pengumuman", type: "BERITA", description: "Pengumuman resmi organisasi" },
   });
   const katSosial = await prisma.kategori.create({
