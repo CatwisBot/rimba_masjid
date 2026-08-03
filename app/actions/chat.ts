@@ -12,15 +12,15 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const CUSTOM_ADMIN_KNOWLEDGE_BASE = `
 1. PROFIL & SEJARAH SINGKAT:
-   - Remaja Islam Masjid Albarkah (RIMBA) adalah wadah organisasi pemuda dan pemudi yang berpusat di Masjid Raya Al-Barkah Bekasi, Kota Bekasi, Jawa Barat.
+   - Remaja Islam Masjid Albarkah (RIMBA) adalah wadah organisasi pemuda dan pemudi yang berpusat di Masjid Raya Al-Barkah.
    - Bertujuan memakmurkan masjid, mempererat ukhuwah islamiyah, serta membangun generasi pemuda muslim yang berakhlak mulia, cerdas, dan aktif dalam dakwah maupun pelayanan kemasyarakatan.
 
 2. VISI & MISI ORGANISASI:
-   - Visi: Menjadikan Masjid Raya Al-Barkah sebagai pusat pengembangan keilmuan, karakter, dan peradaban pemuda Islam terkemuka di Bekasi dan sekitarnya.
+   - Visi: Menjadikan Masjid Raya Al-Barkah sebagai pusat pengembangan keilmuan, karakter, dan peradaban pemuda Islam terkemuka.
    - Misi: Menyelenggarakan kajian rutin (tahfidz, aqidah, fikih pemuda), mengadakan pelatihan keterampilan & kepemimpinan pemuda, serta melaksanakan program bakti sosial dan kemakmuran masjid.
 
 3. INFORMASI KONTAK & ALAMAT KUSTOM:
-   - Lokasi Sekretariat: Komplek Masjid Raya Al-Barkah, Jl. Veteran No.46, Marga Jaya, Kec. Bekasi Selatan, Kota Bekasi, Jawa Barat 17141.
+   - Lokasi Sekretariat: Komplek Masjid Raya Al-Barkah.
    - Waktu Pelayanan Sekretariat: Terbuka untuk umum setiap hari usai salat Ashar hingga Isya.
    - Layanan Pertanyaan / Kerjasama / Undangan Penceramah: Silakan gunakan menu "Kontak" di website atau tinggalkan pesan melalui form obrolan/pesan masuk.
 
@@ -128,7 +128,7 @@ export async function askRimbaAI(userMessage: string, history: ChatMessage[] = [
       ? divisi.map((d) => d.name).join(", ")
       : "Dakwah, Humas, Pubdekdoc, Sosial, Acara, Sponsor";
 
-    const systemPrompt = `Kamu adalah **Tanya RIMBA**, Asisten Virtual dari **Remaja Islam Masjid Albarkah (RIMBA)** Bekasi. Kamu berperan sebagai pemuda masjid yang asik, ramah, bersahabat, gaul tapi tetap santun, sopan, dan hangat. 😊✨
+    const systemPrompt = `Kamu adalah **Tanya RIMBA**, Asisten Virtual dari **Remaja Islam Masjid Albarkah (RIMBA)**. Kamu berperan sebagai pemuda masjid yang asik, ramah, bersahabat, gaul tapi tetap santun, sopan, dan hangat. 😊✨
 
 ### PENTING - GAYA BAHASA & PANJANG BALASAN:
 - Gunakan bahasa Indonesia yang **asik, komunikatif, natural, dan santai namun sopan** (gunakan sapaan hangat seperti "Kak", "Yuk", "Tentu dong!", serta emoji yang menarik seperti 😊, ✨, 🚀, 🕌).
@@ -208,7 +208,7 @@ ${pengurusText}
 
       // Pertanyaan tentang Lokasi / Alamat
       if (lower.includes("lokasi") || lower.includes("alamat") || lower.includes("di mana") || lower.includes("dimana") || (context.includes("rimba") && lower.includes("dimana"))) {
-        return `Hai${sapaanNama}! 📍 Sekretariat atau basecamp kami lokasinya strategis banget, yaitu di **Komplek Masjid Raya Al-Barkah**, Jl. Veteran No. 46, Marga Jaya, Bekasi Selatan. 🕌✨\n\nKami biasanya rutin kumpul dan nongkrong produktif di kesekretariatan hampir setiap hari setelah sholat Ashar atau Isya. Kalau lagi mampir atau abis sholat di masjid, jangan ragu mampir sapa kawan-kawan RIMBA ya! 😊`;
+        return `Hai${sapaanNama}! 📍 Sekretariat atau basecamp kami lokasinya strategis banget, yaitu di **Komplek Masjid Raya Al-Barkah**. 🕌✨\n\nKami biasanya rutin kumpul dan nongkrong produktif di kesekretariatan hampir setiap hari setelah sholat Ashar atau Isya. Kalau lagi mampir atau abis sholat di masjid, jangan ragu mampir sapa kawan-kawan RIMBA ya! 😊`;
       }
 
       // Pertanyaan tentang Agenda / Lomba / Kegiatan / Info Event
@@ -240,7 +240,7 @@ ${pengurusText}
       if (
         lower.includes("apa") || lower.includes("rimba") || lower.includes("sejarah") || lower.includes("profil") || lower.includes("visi") || lower.includes("tentang") || lower.includes("siapa")
       ) {
-        return `Kenalin${sapaanNama}! 🌟 **RIMBA** (Remaja Islam Masjid Albarkah) adalah rumah dan wadah kolaborasi pemuda kreatif di lingkungan Masjid Raya Al-Barkah Kota Bekasi. 🕌\n\nDi sini kita gak cuma ngaji dan belajar ilmu agama bareng, tapi juga berkolaborasi bikin event sosial kemanusiaan, kajian masa kini yang relevan buat pemuda, pengembangan skill kepemimpinan, dan pastinya nambah circle pertemanan yang positif! 😊✨`;
+        return `Kenalin${sapaanNama}! 🌟 **RIMBA** (Remaja Islam Masjid Albarkah) adalah rumah dan wadah kolaborasi pemuda kreatif di lingkungan Masjid Raya Al-Barkah. 🕌\n\nDi sini kita gak cuma ngaji dan belajar ilmu agama bareng, tapi juga berkolaborasi bikin event sosial kemanusiaan, kajian masa kini yang relevan buat pemuda, pengembangan skill kepemimpinan, dan pastinya nambah circle pertemanan yang positif! 😊✨`;
       }
 
       // Berita
