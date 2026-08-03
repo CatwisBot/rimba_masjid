@@ -4,13 +4,13 @@ export const CONTACT_INFO = [
   {
     title: "Lokasi Sekretariat",
     name: "Masjid Al-Barkah",
-    detail: "Jl. Masjid Al-Barkah No. 12, Bekasi Selatan, Kota Bekasi, Jawa Barat",
+    detail: "Komplek Masjid Al-Barkah",
     icon: MapPin,
     badgeColor: "text-accent bg-primary/10 border-primary/20",
   },
   {
     title: "WhatsApp & Telepon",
-    name: "+62 812-3456-7890",
+    name: "+62 815-1398-3136",
     detail: "Layanan Humas RIMBA (Senin - Sabtu)",
     icon: Phone,
     badgeColor: "text-emerald-700 bg-emerald-100 border-emerald-200",
