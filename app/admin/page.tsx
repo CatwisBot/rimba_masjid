@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import {
   Newspaper,
@@ -12,7 +12,6 @@ import {
   ArrowRight,
   Clock,
   RefreshCw,
-  CheckCircle2,
 } from "lucide-react";
 import { getBerita } from "@/app/actions/berita";
 import { getAgenda } from "@/app/actions/agenda";
@@ -42,7 +41,7 @@ export default function AdminDashboardPage() {
     anggota: 0,
   });
   const [upcomingAgendas, setUpcomingAgendas] = useState<AgendaItem[]>([]);
-  const [activities, setActivities] = useState<ActivityItem[]>([
+  const [activities] = useState<ActivityItem[]>([
     {
       id: "1",
       action: "created",
@@ -67,7 +66,7 @@ export default function AdminDashboardPage() {
   ]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const loadData = async () => {
+  const loadData = useCallback(async () => {
     setIsLoading(true);
     try {
       const [beritaRes, agendaRes, anggotaRes, keuanganRes] = await Promise.all([
@@ -81,12 +80,12 @@ export default function AdminDashboardPage() {
       const agendaItems = agendaRes.success && agendaRes.data ? agendaRes.data : [];
       const anggotaCount = anggotaRes.success && anggotaRes.data ? anggotaRes.data.length : 3;
       const saldo = keuanganRes.success && "data" in keuanganRes && keuanganRes.data
-        ? (keuanganRes.data as any).saldoKas
+        ? (keuanganRes.data as { saldoKas: number }).saldoKas
         : 29125000;
 
       setStats({ berita: beritaCount, agenda: agendaItems.length, saldo, anggota: anggotaCount });
       setUpcomingAgendas(
-        agendaItems.slice(0, 3).map((a: any) => ({
+        agendaItems.slice(0, 3).map((a: AgendaItem) => ({
           id: a.id,
           title: a.title,
           formattedDate: a.formattedDate,
@@ -99,11 +98,11 @@ export default function AdminDashboardPage() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     loadData();
-  }, []);
+  }, [loadData]);
 
   const statCards = [
     {
