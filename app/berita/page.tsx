@@ -173,7 +173,7 @@ export default function BeritaPage() {
               <div className="mb-14">
                 <Link
                   href={`/berita/${featuredArticle.slug}`}
-                  className="group relative rounded-3xl bg-surface border border-border/80 overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 grid grid-cols-1 lg:grid-cols-12 cursor-pointer block"
+                  className="group relative rounded-3xl bg-surface border border-border/80 overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 grid grid-cols-1 lg:grid-cols-12 cursor-pointer"
                 >
                   {/* Featured Image */}
                   <div className="lg:col-span-7 relative aspect-16/10 lg:aspect-auto w-full min-h-70 bg-background overflow-hidden">
@@ -230,7 +230,7 @@ export default function BeritaPage() {
                 <Link
                   key={article.id}
                   href={`/berita/${article.slug}`}
-                  className="group relative rounded-3xl bg-surface border border-border/80 overflow-hidden shadow-2xs hover:shadow-xl hover:border-primary/40 transition-all duration-300 flex flex-col justify-between cursor-pointer block"
+                  className="group relative rounded-3xl bg-surface border border-border/80 overflow-hidden shadow-2xs hover:shadow-xl hover:border-primary/40 transition-all duration-300 flex flex-col justify-between cursor-pointer"
                 >
                   <div>
                     {/* Image Container with Overlay Badge & Date */}
