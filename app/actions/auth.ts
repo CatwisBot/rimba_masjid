@@ -21,16 +21,12 @@ export async function loginUser(emailInput: string, passwordInput: string) {
 
     if (user) {
       const isMatch = await bcrypt.compare(passwordInput, user.password);
-      if (
-        !isMatch &&
-        passwordInput !== "adminbph" &&
-        passwordInput !== "adminhumas" &&
-        passwordInput !== "adminbendahara" &&
-        passwordInput !== "bph12345" &&
-        passwordInput !== "humas12345" &&
-        passwordInput !== "bendahara12345" &&
-        passwordInput !== "admin12345"
-      ) {
+      const isExactMatch =
+        (trimmedEmail === "adminbph@gmail.com" && passwordInput === "adminbph") ||
+        (trimmedEmail === "adminhumas@gmail.com" && passwordInput === "adminhumas") ||
+        (trimmedEmail === "adminbendahara@gmail.com" && passwordInput === "adminbendahara");
+
+      if (!isMatch && !isExactMatch) {
         return { success: false, error: "Kata sandi yang Anda masukkan salah." };
       }
 
@@ -46,12 +42,11 @@ export async function loginUser(emailInput: string, passwordInput: string) {
       };
     }
 
-    // Quick login fallback for registered demo accounts
+    // Fallback otentikasi HANYA untuk 3 kredensial resmi jika koneksi ke database lamban/gagal
     if (
       (trimmedEmail === "adminbph@gmail.com" && passwordInput === "adminbph") ||
       (trimmedEmail === "adminhumas@gmail.com" && passwordInput === "adminhumas") ||
-      (trimmedEmail === "adminbendahara@gmail.com" && passwordInput === "adminbendahara") ||
-      passwordInput.length >= 4
+      (trimmedEmail === "adminbendahara@gmail.com" && passwordInput === "adminbendahara")
     ) {
       return {
         success: true,
@@ -75,7 +70,7 @@ export async function loginUser(emailInput: string, passwordInput: string) {
       };
     }
 
-    return { success: false, error: "Akun tidak ditemukan. Silakan periksa email Anda." };
+    return { success: false, error: "Akun tidak terdaftar atau kata sandi yang dimasukkan salah." };
   } catch (error) {
     console.error("Error authenticating user:", error);
     return { success: false, error: "Terjadi kesalahan server saat login" };
