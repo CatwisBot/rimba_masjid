@@ -8,13 +8,18 @@ declare global {
 }
 
 function createPool(): Pool {
-  const connectionString = process.env.DATABASE_URL;
+  const connectionString = process.env.DATABASE_URL || process.env.DIRECT_URL;
   if (!connectionString) {
     throw new Error(
       "DATABASE_URL is not defined. Check your .env file has DATABASE_URL set."
     );
   }
-  return new Pool({ connectionString });
+  return new Pool({
+    connectionString,
+    max: 20,
+    idleTimeoutMillis: 60000,
+    connectionTimeoutMillis: 10000,
+  });
 }
 
 function getPrismaClient(): PrismaClient {
