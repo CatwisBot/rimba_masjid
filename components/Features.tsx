@@ -1,6 +1,6 @@
 "use client";
 
-import { Calendar, Image as ImageIcon, Users, Sparkles } from "lucide-react";
+import { Calendar, Image as ImageIcon, Users } from "lucide-react";
 
 const FEATURES = [
   {
