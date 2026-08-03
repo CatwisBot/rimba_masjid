@@ -86,6 +86,7 @@ export default function AdminLayout({
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsClient(true);
     if (typeof window !== "undefined") {
       const savedRole = localStorage.getItem("rimba_admin_role") as RoleType;
