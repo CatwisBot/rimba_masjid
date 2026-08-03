@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Settings, ShieldCheck, Database, Save, CheckCircle2 } from "lucide-react";
+import { Settings, ShieldCheck, Save, CheckCircle2 } from "lucide-react";
 
 export default function AdminPengaturanPage() {
   const [siteName, setSiteName] = useState("Remaja Islam Masjid Albarkah");
