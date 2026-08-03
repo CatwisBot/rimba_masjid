@@ -209,7 +209,13 @@ ${promptDetail}
 
 HANYA berikan hasil teks siap pakai tanpa pengantar tambahan dari kamu.`;
 
-    const candidateModels = ["gemini-2.0-flash", "gemini-2.0-flash-lite"];
+    const candidateModels = [
+      "gemini-3.5-flash-lite",
+      "gemini-3.1-flash-lite",
+      "gemini-3.6-flash",
+      "gemini-2.5-flash-lite",
+      "gemini-2.5-flash",
+    ];
 
     for (const modelName of candidateModels) {
       try {
@@ -354,7 +360,13 @@ Isi Artikel: ${content.slice(0, 3500)}
 
 HANYA berikan 3 poin ringkasan tanpa kata pengantar tambahan.`;
 
-    const candidateModels = ["gemini-2.0-flash", "gemini-2.0-flash-lite"];
+    const candidateModels = [
+      "gemini-3.5-flash-lite",
+      "gemini-3.1-flash-lite",
+      "gemini-3.6-flash",
+      "gemini-2.5-flash-lite",
+      "gemini-2.5-flash",
+    ];
 
     for (const modelName of candidateModels) {
       try {
