@@ -48,7 +48,7 @@ export async function POST(req: NextRequest) {
 
         if (
           uploadResult.error?.message?.toLowerCase().includes("bucket not found") ||
-          (uploadResult.error as any)?.statusCode === "404"
+          (uploadResult.error as { statusCode?: string })?.statusCode === "404"
         ) {
           try {
             await supabase.storage.createBucket(BUCKET, { public: true });
@@ -68,16 +68,17 @@ export async function POST(req: NextRequest) {
         } else {
           console.warn("Supabase Storage Error, beralih ke Fallback Base64 Data URL:", uploadResult.error.message);
         }
-      } catch (storageErr: any) {
-        console.warn("Supabase upload exception, beralih ke Fallback Base64:", storageErr?.message || storageErr);
+      } catch (storageErr: unknown) {
+        console.warn("Supabase upload exception, beralih ke Fallback Base64:", storageErr instanceof Error ? storageErr.message : storageErr);
       }
     }
 
     // 2. Fallback Data URL: Jika Supabase bucket belum dibuat / anon key tidak cukup izin, gunakan Base64 Data URL
     const base64Url = `data:${file.type};base64,${buffer.toString("base64")}`;
     return NextResponse.json({ url: base64Url });
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error("Upload API error:", err);
-    return NextResponse.json({ error: err.message || "Upload gagal." }, { status: 500 });
+    const message = err instanceof Error ? err.message : "Upload gagal.";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
