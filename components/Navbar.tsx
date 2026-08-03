@@ -32,7 +32,7 @@ export default function Navbar() {
     setIsOpen(false);
   }, [pathname]);
 
-  if (pathname?.startsWith("/admin")) return null;
+  if (pathname?.startsWith("/admin") || pathname === "/login") return null;
 
   return (
     <header
@@ -90,13 +90,15 @@ export default function Navbar() {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center">
-            <Link
-              href="#kontak"
+            <a
+              href="https://wa.me/6281513983136"
+              target="_blank"
+              rel="noopener noreferrer"
               className="group/btn relative inline-flex items-center justify-center px-5 py-2.5 text-sm font-bold text-white bg-linear-to-r from-primary to-primary-dark rounded-full shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/30 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 gap-2"
             >
               <span>Hubungi Kami</span>
               <ArrowRight className="w-4 h-4 text-white group-hover/btn:translate-x-1 transition-transform duration-200" />
-            </Link>
+            </a>
           </div>
 
           {/* Mobile Hamburger — Animated Morphing Icon */}
@@ -112,23 +114,23 @@ export default function Navbar() {
               aria-expanded={isOpen}
               aria-label="Toggle Navigation Menu"
             >
-              <div className="w-5 h-[14px] flex flex-col justify-between">
+              <div className="w-5 h-3.5 flex flex-col justify-between">
                 {/* Top bar */}
                 <span
-                  className={`block h-[2px] bg-current rounded-full transition-all duration-300 ease-in-out ${
-                    isOpen ? "rotate-45 translate-y-[6px]" : "rotate-0 translate-y-0"
+                  className={`block h-0.5 bg-current rounded-full transition-all duration-300 ease-in-out ${
+                    isOpen ? "rotate-45 translate-y-1.5" : "rotate-0 translate-y-0"
                   }`}
                 />
                 {/* Middle bar */}
                 <span
-                  className={`block h-[2px] bg-current rounded-full transition-all duration-300 ease-in-out ${
+                  className={`block h-0.5 bg-current rounded-full transition-all duration-300 ease-in-out ${
                     isOpen ? "opacity-0 scale-x-0" : "opacity-100 scale-x-100 w-[75%]"
                   }`}
                 />
                 {/* Bottom bar */}
                 <span
-                  className={`block h-[2px] bg-current rounded-full transition-all duration-300 ease-in-out ${
-                    isOpen ? "-rotate-45 -translate-y-[6px]" : "rotate-0 translate-y-0"
+                  className={`block h-0.5 bg-current rounded-full transition-all duration-300 ease-in-out ${
+                    isOpen ? "-rotate-45 -translate-y-1.5" : "rotate-0 translate-y-0"
                   }`}
                 />
               </div>
@@ -148,7 +150,7 @@ export default function Navbar() {
         <div className="overflow-hidden">
           <div className="px-4 pt-4 pb-6 flex flex-col items-center">
             {/* Nav Links — compact, centered */}
-            <nav className="flex flex-col items-center gap-2 w-full max-w-[240px]">
+            <nav className="flex flex-col items-center gap-2 w-full max-w-60">
               {NAV_ITEMS.map((item) => {
                 const isActive = pathname === item.href;
                 return (
@@ -170,15 +172,17 @@ export default function Navbar() {
             </nav>
 
             {/* CTA — compact, centered */}
-            <div className="pt-3 mt-3 border-t border-border/80 w-full max-w-[240px] flex justify-center">
-              <Link
-                href="#kontak"
+            <div className="pt-3 mt-3 border-t border-border/80 w-full max-w-60 flex justify-center">
+              <a
+                href="https://wa.me/6281513983136"
+                target="_blank"
+                rel="noopener noreferrer"
                 onClick={() => setIsOpen(false)}
                 className="inline-flex items-center justify-center gap-2 w-full px-6 py-2.5 text-sm font-bold text-white bg-linear-to-r from-primary to-primary-dark rounded-full shadow-md shadow-primary/20 hover:shadow-primary/30 hover:brightness-105 transition-all duration-200"
               >
                 <span>Hubungi Kami</span>
                 <ArrowRight className="w-4 h-4" />
-              </Link>
+              </a>
             </div>
           </div>
         </div>
