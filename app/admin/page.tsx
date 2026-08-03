@@ -76,9 +76,9 @@ export default function AdminDashboardPage() {
         getKeuangan(),
       ]);
 
-      const beritaCount = beritaRes.success && beritaRes.data ? beritaRes.data.length : 3;
-      const agendaItems = agendaRes.success && agendaRes.data ? agendaRes.data : [];
-      const anggotaCount = anggotaRes.success && anggotaRes.data ? anggotaRes.data.length : 3;
+      const beritaCount = beritaRes.success && Array.isArray(beritaRes.data) ? beritaRes.data.length : 3;
+      const agendaItems = agendaRes.success && Array.isArray(agendaRes.data) ? agendaRes.data : [];
+      const anggotaCount = anggotaRes.success && Array.isArray(anggotaRes.data) ? anggotaRes.data.length : 3;
       const saldo = keuanganRes.success && "data" in keuanganRes && keuanganRes.data
         ? (keuanganRes.data as { saldoKas: number }).saldoKas
         : 29125000;
