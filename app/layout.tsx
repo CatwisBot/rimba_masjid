@@ -14,6 +14,11 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "Remaja Islam Masjid Albarkah | RIMBA",
   description: "Aplikasi Resmi Remaja Islam Masjid Albarkah | RIMBA",
+  icons: {
+    icon: "/RIMBA.png",
+    shortcut: "/RIMBA.png",
+    apple: "/RIMBA.png",
+  },
 };
 
 export default function RootLayout({
