@@ -195,7 +195,7 @@ async function main() {
     data: {
       id: "a-1",
       title: "Lomba Tahfidz Al-Qur'an Remaja 2026",
-      description: "Kompetisi hafalan Al-Qur'an (Juz 30 & Juz 29) tingkat remaja se-Kota Bekasi dengan total hadiah jutaan rupiah.",
+      description: "Kompetisi hafalan Al-Qur'an (Juz 30 & Juz 29) tingkat remaja dengan total hadiah jutaan rupiah.",
       category: "Lomba Tahfidz",
       kategoriId: katLomba.id,
       divisiId: divAcara.id,
