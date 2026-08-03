@@ -223,8 +223,8 @@ HANYA berikan hasil teks siap pakai tanpa pengantar tambahan dari kamu.`;
             type: targetType,
           };
         }
-      } catch (err: any) {
-        console.warn(`AI Generator Warning (${modelName}):`, err?.message || err);
+      } catch (err: unknown) {
+        console.warn(`AI Generator Warning (${modelName}):`, err instanceof Error ? err.message : err);
       }
     }
 
@@ -234,8 +234,8 @@ HANYA berikan hasil teks siap pakai tanpa pengantar tambahan dari kamu.`;
       content: generateFallbackContent(),
       type: targetType,
     };
-  } catch (error: any) {
-    console.error("AI Generator Error:", error?.message || error);
+  } catch (error: unknown) {
+    console.error("AI Generator Error:", error instanceof Error ? error.message : error);
     return {
       success: true,
       content: generateFallbackContent(),
@@ -370,14 +370,14 @@ HANYA berikan 3 poin ringkasan tanpa kata pengantar tambahan.`;
             return { success: true, summaryPoints: points.slice(0, 3) };
           }
         }
-      } catch (err: any) {
-        console.warn(`Summarizer Warning (${modelName}):`, err?.message || err);
+      } catch (err: unknown) {
+        console.warn(`Summarizer Warning (${modelName}):`, err instanceof Error ? err.message : err);
       }
     }
 
     return { success: true, summaryPoints: getFallbackSummary() };
-  } catch (error: any) {
-    console.error("Summarizer Error:", error?.message || error);
+  } catch (error: unknown) {
+    console.error("Summarizer Error:", error instanceof Error ? error.message : error);
     return { success: true, summaryPoints: getFallbackSummary() };
   }
 }
