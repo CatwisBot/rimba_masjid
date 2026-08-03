@@ -695,7 +695,7 @@ export default function AgendaPage() {
                   <input
                     type="text"
                     required
-                    placeholder="Contoh: 081234567890"
+                    placeholder="Contoh: 081513983136"
                     value={regForm.contact}
                     onChange={(e) => setRegForm({ ...regForm, contact: e.target.value })}
                     className="w-full px-4 py-2.5 rounded-xl bg-background border border-border focus:outline-none focus:border-primary text-text"
