@@ -5,6 +5,8 @@ import { ArrowLeft, Calendar, User, Clock } from "lucide-react";
 import { getBeritaBySlug } from "@/app/actions/berita";
 import AISummarizerCard from "@/components/AISummarizerCard";
 
+export const revalidate = 60;
+
 interface BeritaDetailPageProps {
   params: Promise<{
     slug: string;
