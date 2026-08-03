@@ -9,7 +9,6 @@ import {
   Clock,
   Search,
   ArrowRight,
-  X,
   User,
   Loader2,
   AlertCircle,
@@ -40,7 +39,6 @@ export default function BeritaPage() {
 
   const [selectedCategory, setSelectedCategory] = useState("Semua");
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeArticle, setActiveArticle] = useState<BeritaItem | null>(null);
 
   const loadData = useCallback(async () => {
     setIsLoading(true);
@@ -173,9 +171,9 @@ export default function BeritaPage() {
             {/* Featured Headline Article (Shown when no active search & category is 'Semua') */}
             {!searchQuery && selectedCategory === "Semua" && featuredArticle && (
               <div className="mb-14">
-                <div
-                  onClick={() => setActiveArticle(featuredArticle)}
-                  className="group relative rounded-3xl bg-surface border border-border/80 overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 grid grid-cols-1 lg:grid-cols-12 cursor-pointer"
+                <Link
+                  href={`/berita/${featuredArticle.slug}`}
+                  className="group relative rounded-3xl bg-surface border border-border/80 overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 grid grid-cols-1 lg:grid-cols-12 cursor-pointer block"
                 >
                   {/* Featured Image */}
                   <div className="lg:col-span-7 relative aspect-16/10 lg:aspect-auto w-full min-h-70 bg-background overflow-hidden">
@@ -222,17 +220,17 @@ export default function BeritaPage() {
                       </div>
                     </div>
                   </div>
-                </div>
+                </Link>
               </div>
             )}
 
             {/* News Cards Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
               {filteredArticles.map((article) => (
-                <article
+                <Link
                   key={article.id}
-                  onClick={() => setActiveArticle(article)}
-                  className="group relative rounded-3xl bg-surface border border-border/80 overflow-hidden shadow-2xs hover:shadow-xl hover:border-primary/40 transition-all duration-300 flex flex-col justify-between cursor-pointer"
+                  href={`/berita/${article.slug}`}
+                  className="group relative rounded-3xl bg-surface border border-border/80 overflow-hidden shadow-2xs hover:shadow-xl hover:border-primary/40 transition-all duration-300 flex flex-col justify-between cursor-pointer block"
                 >
                   <div>
                     {/* Image Container with Overlay Badge & Date */}
@@ -282,84 +280,12 @@ export default function BeritaPage() {
                       <ArrowRight className="w-3.5 h-3.5" />
                     </span>
                   </div>
-                </article>
+                </Link>
               ))}
             </div>
           </>
         )}
       </div>
-
-      {/* Article Reader Modal */}
-      {activeArticle && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-200">
-          <div className="relative w-full max-w-2xl rounded-3xl bg-surface border border-border p-6 sm:p-8 shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto">
-            {/* Close Button */}
-            <button
-              onClick={() => setActiveArticle(null)}
-              className="absolute top-4 right-4 p-2 rounded-full text-text/70 hover:text-text hover:bg-background transition-colors z-20"
-            >
-              <X className="w-5 h-5" />
-            </button>
-
-            {/* Modal Image */}
-            <div className="relative aspect-video w-full rounded-2xl overflow-hidden mb-6 bg-background">
-              <Image
-                src={activeArticle.image || "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?q=80&w=800&auto=format&fit=crop"}
-                alt={activeArticle.title}
-                fill
-                className="object-cover"
-                unoptimized
-              />
-            </div>
-
-            {/* Article Meta */}
-            <div className="flex items-center gap-3 text-xs text-text/70 mb-3 flex-wrap">
-              <span className="px-3 py-1 font-bold text-white bg-primary rounded-full">
-                {activeArticle.category}
-              </span>
-              <span>•</span>
-              <span className="flex items-center gap-1">
-                <Calendar className="w-3.5 h-3.5 text-primary" />
-                {getDisplayDate(activeArticle)}
-              </span>
-              <span>•</span>
-              <span className="flex items-center gap-1">
-                <User className="w-3.5 h-3.5 text-accent" />
-                {activeArticle.author}
-              </span>
-            </div>
-
-            {/* Title */}
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-text leading-tight mb-4">
-              {activeArticle.title}
-            </h2>
-
-            {/* Paragraphs */}
-            <div className="space-y-4 text-sm sm:text-base text-text/80 leading-relaxed border-t border-border pt-4">
-              {activeArticle.content.split("\n\n").map((paragraph, index) => (
-                <p key={index}>{paragraph}</p>
-              ))}
-            </div>
-
-            {/* Modal Footer */}
-            <div className="mt-8 pt-4 border-t border-border flex items-center justify-between">
-              <Link
-                href={`/berita/${activeArticle.slug}`}
-                className="text-xs font-bold text-primary hover:underline flex items-center gap-1"
-              >
-                <span>Buka di Halaman Penuh</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
-              <button
-                onClick={() => setActiveArticle(null)}
-                className="px-5 py-2 text-xs font-bold text-text bg-background hover:bg-border rounded-full transition-colors"
-              >
-                Tutup
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </main>
   );
 }
