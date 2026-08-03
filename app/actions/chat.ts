@@ -41,13 +41,19 @@ export interface ChatMessage {
 
 // Fungsi pengambil data secara aman dari database tanpa memicu error
 async function getSafeData() {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let agendas: any[] = [];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let beritas: any[] = [];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let anggota: any[] = [];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let divisi: any[] = [];
 
   try {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     if ((prisma as any).agenda?.findMany) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       agendas = await (prisma as any).agenda.findMany({
         where: { status: "Aktif" },
         take: 5,
@@ -59,7 +65,9 @@ async function getSafeData() {
   }
 
   try {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     if ((prisma as any).berita?.findMany) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       beritas = await (prisma as any).berita.findMany({
         where: { status: "Published" },
         take: 4,
@@ -71,7 +79,9 @@ async function getSafeData() {
   }
 
   try {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     if ((prisma as any).anggota?.findMany) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       anggota = await (prisma as any).anggota.findMany({
         take: 15,
         orderBy: { order: "asc" },
@@ -82,7 +92,9 @@ async function getSafeData() {
   }
 
   try {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     if ((prisma as any).divisi?.findMany) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       divisi = await (prisma as any).divisi.findMany({
         take: 10,
       });
@@ -264,8 +276,8 @@ ${CUSTOM_ADMIN_KNOWLEDGE_BASE}
           success: true,
           reply: result.response.text(),
         };
-      } catch (apiError: any) {
-        console.warn(`Gemini API Warning (${modelName}):`, apiError?.message || apiError);
+      } catch (apiError: unknown) {
+        console.warn(`Gemini API Warning (${modelName}):`, apiError instanceof Error ? apiError.message : apiError);
 
         // Percobaan fallback prompt gabungan untuk model ini
         try {
@@ -276,7 +288,7 @@ ${CUSTOM_ADMIN_KNOWLEDGE_BASE}
             success: true,
             reply: resultBackup.response.text(),
           };
-        } catch (backupErr) {
+        } catch {
           // Lanjut coba model berikutnya di candidateModels loop
         }
       }
@@ -287,8 +299,8 @@ ${CUSTOM_ADMIN_KNOWLEDGE_BASE}
       success: true,
       reply: getLocalResponse(userMessage, history),
     };
-  } catch (error: any) {
-    console.error("Error utama askRimbaAI:", error?.message || error);
+  } catch (error: unknown) {
+    console.error("Error utama askRimbaAI:", error instanceof Error ? error.message : error);
     return {
       success: true,
       reply: `Assalamu'alaikum! Terima kasih telah menghubungi Tanya RIMBA.\n\nSaat ini sistem perpesanan AI sedang menangani pemeliharaan jaringan. Anda dapat tetap melihat informasi agenda dan pengurus di menu utama website atau menghubungi kami di halaman **Kontak**.`,
