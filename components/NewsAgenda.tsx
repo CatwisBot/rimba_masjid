@@ -10,7 +10,7 @@ export interface BeritaItem {
   slug: string;
   category: string;
   excerpt: string;
-  content: string;
+  content?: string;
   image: string;
   status: string;
   author: string;
