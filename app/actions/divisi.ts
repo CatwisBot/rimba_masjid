@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 
 export async function getDivisi() {
   try {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const divisions = await (prisma as any).divisi.findMany({
       orderBy: { name: "asc" },
       include: {
@@ -26,6 +27,7 @@ export async function createDivisi(formData: {
   icon?: string;
 }) {
   try {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const newDivisi = await (prisma as any).divisi.create({
       data: {
         code: formData.code.toUpperCase().trim(),
