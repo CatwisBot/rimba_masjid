@@ -66,6 +66,7 @@ export default function AdminAgendaPage() {
   }, []);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     loadData();
   }, [loadData]);
 
@@ -99,7 +100,7 @@ export default function AdminAgendaPage() {
           </button>
           <Link
             href="/admin/agenda/tambah"
-            className="inline-flex items-center justify-center px-5 py-2.5 text-xs sm:text-sm font-bold text-white bg-gradient-to-r from-primary to-primary-dark hover:from-primary-dark hover:to-primary rounded-2xl shadow-md transition-all gap-2"
+            className="inline-flex items-center justify-center px-5 py-2.5 text-xs sm:text-sm font-bold text-white bg-linear-to-r from-primary to-primary-dark hover:from-primary-dark hover:to-primary rounded-2xl shadow-md transition-all gap-2"
           >
             <Plus className="w-4 h-4 text-accent" />
             <span>+ Tambah Agenda Baru</span>
