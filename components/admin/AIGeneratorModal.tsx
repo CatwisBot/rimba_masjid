@@ -75,6 +75,7 @@ export default function AIGeneratorModal({ isOpen, onClose, item }: AIGeneratorM
 
   useEffect(() => {
     if (isOpen && item) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       handleGenerate(targetType, tone);
     }
   }, [isOpen, item, handleGenerate, targetType, tone]);
@@ -216,7 +217,7 @@ export default function AIGeneratorModal({ isOpen, onClose, item }: AIGeneratorM
           </div>
 
           {/* Generated Result Container */}
-          <div className="relative rounded-2xl border border-border bg-background/80 p-4 min-h-[220px]">
+          <div className="relative rounded-2xl border border-border bg-background/80 p-4 min-h-55">
             {isLoading ? (
               <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-background/90 backdrop-blur-xs rounded-2xl z-10">
                 <Loader2 className="w-7 h-7 animate-spin text-primary" />
@@ -225,7 +226,7 @@ export default function AIGeneratorModal({ isOpen, onClose, item }: AIGeneratorM
                 </span>
               </div>
             ) : (
-              <pre className="whitespace-pre-wrap text-xs sm:text-sm text-text/90 font-sans leading-relaxed break-words">
+              <pre className="whitespace-pre-wrap text-xs sm:text-sm text-text/90 font-sans leading-relaxed wrap-break-words">
                 {generatedText}
               </pre>
             )}
@@ -258,7 +259,7 @@ export default function AIGeneratorModal({ isOpen, onClose, item }: AIGeneratorM
               className={`px-5 py-2.5 font-bold rounded-2xl text-xs flex items-center justify-center gap-2 transition-all shadow-md ${
                 copied
                   ? "bg-emerald-600 text-white"
-                  : "bg-gradient-to-r from-primary to-primary-dark hover:from-primary-dark hover:to-primary text-white"
+                  : "bg-linear-to-r from-primary to-primary-dark hover:from-primary-dark hover:to-primary text-white"
               }`}
             >
               {copied ? (
