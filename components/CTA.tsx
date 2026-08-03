@@ -43,18 +43,20 @@ export default function CTA() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 w-full sm:w-auto">
               
               {/* Button 1: Hubungi Kami */}
-              <Link
-                href="#kontak"
+              <a
+                href="https://wa.me/6281513983136"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group inline-flex items-center justify-center px-7 py-3.5 text-base font-bold text-primary bg-white hover:bg-accent hover:text-primary-dark rounded-full shadow-lg transition-all duration-200 gap-2.5 w-full sm:w-auto"
               >
                 <MessageCircle className="w-5 h-5 text-primary group-hover:text-primary-dark transition-colors" />
                 <span>Hubungi Kami</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
-              </Link>
+              </a>
 
               {/* Button 2: Lihat Galeri */}
               <Link
-                href="#galeri"
+                href="/galeri"
                 className="inline-flex items-center justify-center px-7 py-3.5 text-base font-semibold text-white hover:text-accent bg-white/10 hover:bg-white/20 border border-white/30 backdrop-blur-md rounded-full transition-all duration-200 gap-2.5 w-full sm:w-auto"
               >
                 <ImageIcon className="w-5 h-5 text-accent" />
