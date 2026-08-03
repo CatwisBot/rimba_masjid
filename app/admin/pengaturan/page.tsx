@@ -6,7 +6,7 @@ import { Settings, ShieldCheck, Save, CheckCircle2 } from "lucide-react";
 export default function AdminPengaturanPage() {
   const [siteName, setSiteName] = useState("Remaja Islam Masjid Albarkah");
   const [siteShortName, setSiteShortName] = useState("RIMBA");
-  const [contactPhone, setContactPhone] = useState("+62 812-3456-7890");
+  const [contactPhone, setContactPhone] = useState("+62 815-1398-3136");
   const [contactEmail, setContactEmail] = useState("info@rimbamasjid.or.id");
   const [isSaved, setIsSaved] = useState(false);
 
