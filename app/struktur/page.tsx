@@ -5,10 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   Users,
-  Shield,
-  UserCheck,
-  FileText,
-  Wallet,
   Megaphone,
   Coins,
   Utensils,
