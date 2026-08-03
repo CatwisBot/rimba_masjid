@@ -19,7 +19,18 @@ export default async function BeritaDetailPage({ params }: BeritaDetailPageProps
     notFound();
   }
 
-  const article = res.data;
+  const article = res.data as {
+    id: string;
+    title: string;
+    slug: string;
+    category: string;
+    excerpt: string;
+    content: string;
+    image: string;
+    author: string;
+    readTime?: string;
+    createdAt: Date | string;
+  };
 
   return (
     <main className="min-h-screen bg-background py-10 lg:py-16">
