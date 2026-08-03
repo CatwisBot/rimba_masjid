@@ -9,7 +9,6 @@ import {
   TrendingUp,
   TrendingDown,
   Wallet,
-  Trash2,
 } from "lucide-react";
 import { getKeuangan, createKeuangan } from "@/app/actions/keuangan";
 
@@ -71,6 +70,7 @@ export default function AdminKeuanganPage() {
   }, []);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     loadData();
   }, [loadData]);
 
