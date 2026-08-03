@@ -3,11 +3,43 @@
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 
+interface CacheItem<T> {
+  data: T;
+  timestamp: number;
+}
+
+let beritaListCache: CacheItem<unknown> | null = null;
+const slugCacheMap = new Map<string, CacheItem<unknown>>();
+const CACHE_TTL_MS = 60 * 1000; // 60 detik (1 menit)
+
+export async function invalidateBeritaCache() {
+  beritaListCache = null;
+  slugCacheMap.clear();
+}
+
 export async function getBerita() {
+  const now = Date.now();
+  if (beritaListCache && now - beritaListCache.timestamp < CACHE_TTL_MS) {
+    return { success: true, data: beritaListCache.data };
+  }
+
   try {
     const news = await prisma.berita.findMany({
       orderBy: { createdAt: "desc" },
+      select: {
+        id: true,
+        title: true,
+        slug: true,
+        category: true,
+        excerpt: true,
+        image: true,
+        status: true,
+        author: true,
+        readTime: true,
+        createdAt: true,
+      },
     });
+    beritaListCache = { data: news, timestamp: now };
     return { success: true, data: news };
   } catch (error) {
     console.error("Error fetching berita:", error);
@@ -16,6 +48,12 @@ export async function getBerita() {
 }
 
 export async function getBeritaBySlug(slug: string) {
+  const now = Date.now();
+  const cached = slugCacheMap.get(slug);
+  if (cached && now - cached.timestamp < CACHE_TTL_MS) {
+    return { success: true, data: cached.data };
+  }
+
   try {
     const item = await prisma.berita.findUnique({
       where: { slug },
@@ -23,6 +61,7 @@ export async function getBeritaBySlug(slug: string) {
     if (!item) {
       return { success: false, error: "Berita tidak ditemukan" };
     }
+    slugCacheMap.set(slug, { data: item, timestamp: now });
     return { success: true, data: item };
   } catch (error) {
     console.error("Error fetching berita by slug:", error);
@@ -81,6 +120,7 @@ export async function createBerita(formData: {
       },
     });
 
+    await invalidateBeritaCache();
     revalidatePath("/admin/berita");
     revalidatePath("/berita");
     revalidatePath("/");
@@ -113,6 +153,7 @@ export async function updateBerita(
       },
     });
 
+    await invalidateBeritaCache();
     revalidatePath("/admin/berita");
     revalidatePath("/berita");
     revalidatePath("/");
@@ -126,10 +167,11 @@ export async function updateBerita(
 export async function deleteBerita(id: string) {
   try {
     await prisma.berita.delete({ where: { id } });
+    await invalidateBeritaCache();
     revalidatePath("/admin/berita");
     revalidatePath("/berita");
     revalidatePath("/");
-    return { success: true };
+    return { success: true, data: { id } };
   } catch (error) {
     console.error("Error deleting berita:", error);
     return { success: false, error: "Gagal menghapus berita" };
