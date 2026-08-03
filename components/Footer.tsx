@@ -24,12 +24,12 @@ const QUICK_LINKS = [
 const SOCIAL_LINKS = [
   { name: "Instagram", href: "https://instagram.com", icon: Instagram },
   { name: "YouTube", href: "https://youtube.com", icon: Youtube },
-  { name: "WhatsApp", href: "https://wa.me/6281234567890", icon: MessageCircle },
+  { name: "WhatsApp", href: "https://wa.me/6281513983136", icon: MessageCircle },
 ];
 
 export default function Footer() {
   const pathname = usePathname();
-  if (pathname?.startsWith("/admin")) {
+  if (pathname?.startsWith("/admin") || pathname === "/login") {
     return null;
   }
 
@@ -117,7 +117,7 @@ export default function Footer() {
               <div className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-accent shrink-0 mt-0.5" />
                 <span>
-                  Masjid Al-Barkah, Jl. Masjid Albarkah, Indonesia
+                  Komplek Masjid Al-Barkah
                 </span>
               </div>
 
@@ -130,8 +130,8 @@ export default function Footer() {
 
               <div className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-accent shrink-0" />
-                <a href="https://wa.me/6281234567890" className="hover:text-white transition-colors">
-                  +62 812-3456-7890
+                <a href="https://wa.me/6281513983136" className="hover:text-white transition-colors">
+                  +62 815-1398-3136
                 </a>
               </div>
             </div>
