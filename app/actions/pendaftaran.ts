@@ -32,6 +32,7 @@ export async function createPendaftaran(formData: {
         agendaId: formData.agendaId,
         notes: formData.notes,
         status: StatusPendaftaran.MENUNGGU,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } as any,
     });
 
