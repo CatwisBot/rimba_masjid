@@ -7,7 +7,7 @@ import { getBerita } from "@/app/actions/berita";
 import { getAgenda } from "@/app/actions/agenda";
 import prisma from "@/lib/prisma";
 
-export const revalidate = 0;
+export const revalidate = 60;
 
 export default async function HomePage() {
   const [beritaRes, agendaRes, anggotaCount, agendaCount, galeriCount] = await Promise.all([
