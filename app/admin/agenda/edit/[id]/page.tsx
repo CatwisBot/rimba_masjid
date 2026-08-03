@@ -39,7 +39,17 @@ export default function AdminAgendaEditPage({ params }: AdminAgendaEditPageProps
       try {
         const res = await getAgendaById(id);
         if (res.success && res.data) {
-          const item = res.data as any;
+          const item = res.data as {
+            title: string;
+            category: string;
+            description: string;
+            formattedDate: string;
+            time?: string | null;
+            location?: string | null;
+            image?: string | null;
+            deadline?: string | null;
+            requirements?: string | null;
+          };
           setFormData({
             title: item.title,
             category: item.category,
