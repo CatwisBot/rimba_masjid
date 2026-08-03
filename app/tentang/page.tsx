@@ -1,5 +1,3 @@
-"use client";
-
 import { Info, Users } from "lucide-react";
 
 import {
@@ -9,6 +7,8 @@ import {
   BPH_LIST,
   DIVISIONS
 } from "@/data/aboutData";
+
+export const revalidate = 60;
 
 export default function TentangPage() {
   return (
