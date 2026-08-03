@@ -1,0 +1,183 @@
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  BPH
+  HUMAS
+  BENDAHARA
+}
+
+enum StatusPendaftaran {
+  MENUNGGU
+  DIKONFIRMASI
+  DITOLAK
+}
+
+enum StatusPesan {
+  Baru
+  Diproses
+  Selesai
+}
+
+enum TipeKeuangan {
+  PEMASUKAN
+  PENGELUARAN
+}
+
+model User {
+  id           String        @id @default(cuid())
+  name         String
+  email        String        @unique
+  password     String
+  role         Role          @default(BPH)
+  badge        String        @default("Super Admin")
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  berita       Berita[]
+  galeri       Galeri[]
+  keuangan     Keuangan[]
+  activityLogs ActivityLog[]
+  pendaftaran  Pendaftaran[]
+}
+
+model Divisi {
+  id          String    @id @default(cuid())
+  code        String    @unique
+  name        String
+  description String?   @db.Text
+  icon        String?
+  members     Anggota[]
+  agendas     Agenda[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Kategori {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  type        String   @default("UMUM")
+  description String?
+  berita      Berita[]
+  agendas     Agenda[]
+  galeri      Galeri[]
+  createdAt   DateTime @default(now())
+}
+
+model Berita {
+  id          String    @id @default(cuid())
+  title       String
+  slug        String    @unique
+  category    String
+  excerpt     String
+  content     String    @db.Text
+  image       String
+  status      String    @default("Published")
+  author      String    @default("Humas RIMBA")
+  readTime    String    @default("3 min baca")
+  authorId    String?
+  authorUser  User?     @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  kategoriId  String?
+  kategoriObj Kategori? @relation(fields: [kategoriId], references: [id], onDelete: SetNull)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Agenda {
+  id            String        @id @default(cuid())
+  title         String
+  description   String        @db.Text
+  category      String
+  date          DateTime
+  formattedDate String
+  time          String
+  location      String
+  status        String        @default("Aktif")
+  image         String?
+  deadline      String?
+  requirements  String?       @db.Text
+  divisiId      String?
+  divisi        Divisi?       @relation(fields: [divisiId], references: [id], onDelete: SetNull)
+  kategoriId    String?
+  kategoriObj   Kategori?     @relation(fields: [kategoriId], references: [id], onDelete: SetNull)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  pendaftaran   Pendaftaran[]
+}
+
+model Galeri {
+  id          String    @id @default(cuid())
+  title       String
+  category    String
+  image       String
+  caption     String?
+  createdById String?
+  createdBy   User?     @relation(fields: [createdById], references: [id], onDelete: SetNull)
+  kategoriId  String?
+  kategoriObj Kategori? @relation(fields: [kategoriId], references: [id], onDelete: SetNull)
+  createdAt   DateTime  @default(now())
+}
+
+model Pendaftaran {
+  id          String            @id @default(cuid())
+  name        String
+  contact     String
+  agendaTitle String
+  agendaId    String?
+  agenda      Agenda?           @relation(fields: [agendaId], references: [id], onDelete: Cascade)
+  userId      String?
+  user        User?             @relation(fields: [userId], references: [id], onDelete: SetNull)
+  status      StatusPendaftaran @default(MENUNGGU)
+  notes       String?
+  createdAt   DateTime          @default(now())
+}
+
+model PesanMasuk {
+  id         String      @id @default(cuid())
+  senderName String      @default("Anonymous")
+  contact    String?
+  category   String      @default("Pertanyaan")
+  message    String      @db.Text
+  status     StatusPesan @default(Baru)
+  createdAt  DateTime    @default(now())
+}
+
+model Anggota {
+  id        String   @id @default(cuid())
+  name      String
+  role      String
+  category  String
+  avatar    String?
+  order     Int      @default(0)
+  divisiId  String?
+  divisi    Divisi?  @relation(fields: [divisiId], references: [id], onDelete: SetNull)
+  createdAt DateTime @default(now())
+}
+
+model Keuangan {
+  id          String       @id @default(cuid())
+  type        TipeKeuangan
+  category    String
+  amount      Float
+  description String
+  createdById String?
+  createdBy   User?        @relation(fields: [createdById], references: [id], onDelete: SetNull)
+  date        DateTime     @default(now())
+  createdAt   DateTime     @default(now())
+}
+
+model ActivityLog {
+  id          String   @id @default(cuid())
+  action      String
+  entity      String
+  description String
+  user        String
+  userId      String?
+  userObj     User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  timeAgo     String   @default("Baru saja")
+  createdAt   DateTime @default(now())
+}
