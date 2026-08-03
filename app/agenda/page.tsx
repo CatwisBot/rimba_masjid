@@ -16,7 +16,6 @@ import {
   Share2,
   Info,
   Check,
-  ArrowRight,
 } from "lucide-react";
 import { getAgenda } from "@/app/actions/agenda";
 import { createPendaftaran } from "@/app/actions/pendaftaran";
@@ -76,6 +75,7 @@ export default function AgendaPage() {
   }, []);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     loadData();
   }, [loadData]);
 
@@ -90,6 +90,7 @@ export default function AgendaPage() {
         );
       });
       if (match) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setSelectedDay(new Date(match.date).getDate());
       }
     }
